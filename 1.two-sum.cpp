@@ -41,13 +41,14 @@ class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
 	vector<int> res;
-	for (int i = 0; i <= nums.size() - 2; i++) {
-		for (int j = i + 1; j <= nums.size() -1; j++) {
-			if (nums[i] == target - nums[j]) {
-				res.push_back(i);
-				res.push_back(j);
-				return res;
-			}
+	unordered_map<int, int> hash;
+	for (int i = 0; i < nums.size(); i++) {
+		if (hash.find(target - nums[i]) != hash.end()) {
+			res.push_back(i);
+			res.push_back(hash[target - nums[i]]);
+			break;
+		} else {
+			hash[nums[i]] = i;
 		}
 	}   
 	return res;
